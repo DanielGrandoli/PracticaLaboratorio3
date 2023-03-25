@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+C:\Users\danig\OneDrive\Escritorio\facultad\Primer cuatrimestre\Laboratorio 3\Proyectos\.metadata\.plugins\org.eclipse.jdt.core
+1865797976.index
+2932552456.index
+759071528.index
