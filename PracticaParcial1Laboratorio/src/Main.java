@@ -32,12 +32,26 @@ public class Main {
 
 		}
 
-		int opcion = 0;
+		int opcion = -100;
 
 		do {
-			opcion = Integer.parseInt(JOptionPane.showInputDialog("Seleccione una opcion: \n1 Agregar Catedra"
-					+ "\n2 Mostrar la lista de Cátedras  \n3 Ordenar y mostrar: (luego debe elegir una opción): \n4 Salir\r\n"
-					+ ""));
+			try {
+				opcion = Integer.parseInt(JOptionPane.showInputDialog("Seleccione una opcion: \n1 Agregar Catedra"
+						+ "\n2 Mostrar la lista de Cátedras  \n3 Ordenar y mostrar: (luego debe elegir una opción): \n4 Salir\r\n"
+						+ ""));
+				if(opcion >= 5 || opcion == 0)
+				{
+				throw new ErrorOpcionEquivocada();
+				}
+				}
+			catch(NumberFormatException fe)
+			{
+				JOptionPane.showMessageDialog(null, fe.getMessage());
+			}
+			catch(ErrorOpcionEquivocada eo)
+			{
+				JOptionPane.showMessageDialog(null, eo.getMessage());
+			}
 			switch (opcion) {
 
 			case 1:
@@ -59,8 +73,25 @@ public class Main {
 			case 3:
 				int Tipoorden = 0;
 				do {
+					try
+					{
 					Tipoorden = Integer.parseInt(JOptionPane
 							.showInputDialog("Seleccione una opcion:\n1 Por Nombre de cátedra\n" + "2 Por nro de aula"));
+					
+					if(Tipoorden != 1 || Tipoorden != 2)
+					{
+					throw new ErrorOpcionEquivocada();
+					}
+					}
+					catch(NumberFormatException ne)
+					{
+						JOptionPane.showMessageDialog(null, ne.getMessage());
+					}
+					catch(ErrorOpcionEquivocada el)
+					{
+						JOptionPane.showMessageDialog(null, el.getMessage());
+					}
+					
 					if (Tipoorden == 1) {
 						Collections.sort(listaCatedra, new OrdenarPorNombre());
 						for (Catedra c : listaCatedra) {
@@ -74,13 +105,8 @@ public class Main {
 							System.out.println(c.toString());
 						}
 						Tipoorden=-1;
-					} 
-					else if(Tipoorden > 2) {
-						Tipoorden = Integer.parseInt(JOptionPane
-								.showInputDialog("Seleccione una opcion:\n1 Por Nombre de cátedra\n" + "2 Por nro de aula"));
 					}
 					
-
 				} while (Tipoorden != -1);
 				break;
 			}
